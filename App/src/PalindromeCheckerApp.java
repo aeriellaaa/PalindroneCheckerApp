@@ -1,34 +1,32 @@
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class PalindromeCheckerApp {
-
     public static void main(String[] args) {
+        String input = "refer";   // input string
 
-        String text = "madam";
+        Deque<Character> deque = new ArrayDeque<>();
 
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
-
-        // Enqueue and Push characters
-        for (int i = 0; i < text.length(); i++) {
-            char ch = text.charAt(i);
-            queue.add(ch);     // enqueue (FIFO)
-            stack.push(ch);    // push (LIFO)
+        // Insert characters into deque
+        for (char ch : input.toCharArray()) {
+            deque.addLast(ch);
         }
 
         boolean isPalindrome = true;
 
-        // Compare dequeue and pop
-        while (!queue.isEmpty()) {
-            if (queue.remove() != stack.pop()) {
+        // Compare front and rear characters
+        while (deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Display result
-        System.out.println("Input text : " + text);
-        System.out.println("Is it a Palindrome? : " + isPalindrome);
-
+        // Print result
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
